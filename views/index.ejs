@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= brandName %></title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Link to Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-center"><%= brandName %> - Farhad</h1>
+    <form action="/" method="post" class="d-flex justify-content-center align-items-center mb-4">
+      <input type="text" name="task" placeholder="Add a new task..." class="form-control">
+      <button type="submit" class="btn btn-success">Add</button>
+    </form>
+    <ul class="list-group">
+      <% tasks.forEach(task => { %>
+        <li class="list-group-item d-flex justify-content-between align-items-center" style="--item-color: <%= task.isPositive ? '#aceb98' : '#A4C2A8' %>;">
+          <%= task.description %>
+          <div>
+            <form action="/tasks/<%= task._id %>/done" method="post" style="display: inline;">
+              <button type="submit" class="btn btn-info btn-done">
+                <i class="fas fa-check"></i> <!-- Font Awesome check icon -->
+              </button>
+            </form>
+            <form action="/tasks/<%= task._id %>/delete" method="post" style="display: inline;">
+              <button type="submit" class="btn btn-danger btn-delete">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+
+  <!-- Link to Bootstrap JS and Font Awesome (for the check icon) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>
